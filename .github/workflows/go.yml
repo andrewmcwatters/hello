@@ -13,6 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    # https://go.dev/doc/faq#git_https
+    # https://github.com/actions/checkout/tree/v2.0.0#checkout-a-different-private-repository
+    - name: Set up .netrc
+      run: echo 'machine github.com login andrewmcwatters password ${{ secrets.GH_PAT }}' > $HOME/.netrc
+
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
