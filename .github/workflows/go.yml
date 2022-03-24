@@ -18,6 +18,13 @@ jobs:
     - name: Set up .netrc
       run: echo 'machine github.com login andrewmcwatters password ${{ secrets.GH_PAT }}' > $HOME/.netrc
 
+    # https://docs.github.com/en/developers/overview/managing-deploy-keys#deploy-keys
+    - name: Set up SSH key
+      run: |
+        mkdir ~/.ssh
+        echo '${{ secrets.SSH_KEY }}' > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+
     # https://go.dev/doc/faq#git_https
     - name: Set up Git
       run: /usr/bin/git config --global url.ssh://git@github.com/.insteadOf https://github.com/
