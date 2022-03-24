@@ -18,6 +18,10 @@ jobs:
     - name: Set up .netrc
       run: echo 'machine github.com login andrewmcwatters password ${{ secrets.GH_PAT }}' > $HOME/.netrc
 
+    # https://go.dev/doc/faq#git_https
+    - name: Set up Git
+      run: /usr/bin/git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
